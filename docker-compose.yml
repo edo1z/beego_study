@@ -1,9 +1,13 @@
-version: '2'
+version: '3'
 services:
   go:
     build: docker/go
-    ports:
-      - "8080:8080"
     volumes:
       - ".:/go/src/app"
     command: bee run
+  nginx:
+    build: docker/nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - go
